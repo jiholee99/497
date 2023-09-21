@@ -1,0 +1,1 @@
+It swril arounds the whole grid by square and then when it meets the wall it would turn left and start it again.
