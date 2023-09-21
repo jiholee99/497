@@ -39,9 +39,20 @@ class VacuumAgent(python_actr.ACTR):
 		num_turns = str(int(num_turns) + 1)
 		goal.set("rsearch left ?dist ?num_turns ?dist")
 
+	def new_search(goal = "rsearch left ?dist 4 ?dist"):
 
+		dist = str(int(dist) + 1)
+		print(f"Dist : {dist}")
+		goal.set(f"rsearch left {dist} 0 {dist}")
+		motorInset = "busy:False"
+		body = "ahead_cell.wall:False"
 
-		###Other stuff!
+	def handle_wall(goal="rsearch left ?dist ?num_turns ?curr_dist",
+					body="ahead_cell.wall:True"):
+		motorInst.go_left()
+
+		num_turns = str(int(num_turns) + 1)
+		goal.set("rsearch left ?dist ?num_turns ?curr_dist")
 
 
 world=grid.World(MyCell,map=AgentSupport.mymap)
