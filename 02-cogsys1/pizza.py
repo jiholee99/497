@@ -18,9 +18,9 @@ class PizzaBuilder(ACTR):
 		return ("_".join(pizza_ingred))
 
 	def init():
-		goal.set("build_pizza prep")
+		goal.set("build_pizza prep:prep")
 
-	def prep_ingredients(goal="build_pizza prep"):
+	def prep_ingredients(goal="build_pizza prep:prep"):
 		#start building our sandwich!
 		goal.set("build_pizza thincrust")
 
@@ -42,18 +42,19 @@ class PizzaBuilder(ACTR):
 	def place_mozzarella(goal="build_pizza prev:sauce next:mozzarella"):
 		my_pizza.append("mozzarella")
 		goal.set("build_pizza prev:mozzarella next:pepperoni")
-		
-	def place_pepperoni(goal="build_pizza prev:mozzarella next:?ingred"):
-		# Should place pepperoni, then move on to placing onions
-		my_pizza.append(ingred)
-		goal.set("build_pizza prev:?ingred next:onion")
 
 	def place_cheddar(goal="build_pizza prev:bbq next:cheddar"):
 		# Should place pepperoni, then move on to placing onions
 		my_pizza.append("cheddar")
-		goal.set("build_pizza prev:cheddar next:onion")
+		goal.set("build_pizza prev:cheddar next:")
 
-	def place_onions(goal="build_pizza prev:?cheese next:onion"):
+	def place_pepperoni(goal="build_pizza prev:cheddar next:?ingred"):
+		# Should place pepperoni, then move on to placing onions
+		my_pizza.append("pepperoni")
+		goal.set("cook_pizza")
+
+
+	def place_onions(goal="build_pizza prev:cheddar next:?ingred"):
 		# Should place onions then move on to cooking the pizza
 		my_pizza.append("onion")
 		goal.set("cook_pizza")
